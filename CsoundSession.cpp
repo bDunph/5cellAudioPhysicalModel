@@ -1,11 +1,6 @@
 #include "CsoundSession.hpp"
 
-#include <csound.hpp>
-#include <csPerfThread.hpp>
-
 #include <iostream>
-#include <string>
-using namespace std;
 
 void CsoundSession::startThread(){
 	if(Compile((char *)m_csd.c_str()) == 0){
@@ -14,7 +9,7 @@ void CsoundSession::startThread(){
 	}
 };
 
-void CsoundSession::resetSession(string const &csdFileName){
+void CsoundSession::resetSession(std::string const &csdFileName){
 	if(!csdFileName.empty()) m_csd = csdFileName;
 
 	if(!m_csd.empty()){
@@ -33,22 +28,22 @@ void CsoundSession::stopPerformance(){
 };
 
 void CsoundSession::mainLoop(){
-	string s;
+	std::string s;
 	bool loop = true;
 	while(loop){
-		cout << endl << "l)oad csd; e)vent; r)ewind; t)oggle pause; s)top; p)lay; q)uit: ";
-		char c = cin.get();
+		std::cout << std::endl << "l)oad csd; e)vent; r)ewind; t)oggle pause; s)top; p)lay; q)uit: ";
+		char c = std::cin.get();
 		switch(c) {
 			case 'l':
-				cout << "Enter the name of csd file:";
-				cin >> s;
+				std::cout << "Enter the name of csd file:";
+				std::cin >> s;
 				resetSession(s);
 				break;
 
 			case 'e':
-				cout << "Enter a score event:";
-				cin.ignore(1000, '\n');
-				getline(cin, s);
+				std::cout << "Enter a score event:";
+				std::cin.ignore(1000, '\n');
+				std::getline(std::cin, s);
 				m_pt->InputMessage(s.c_str());
 				break;
 
@@ -77,7 +72,7 @@ void CsoundSession::mainLoop(){
 				break;
 
 		}
-		cout << endl;
+		std::cout << std::endl;
 	}
 };
 

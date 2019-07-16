@@ -2,19 +2,17 @@
 #define CSOUNDSESSION_H
 
 #include <string>
-using namespace std;
-
 #include <csound.hpp>
 #include <csPerfThread.hpp>
 
 class CsoundSession : public Csound{
 
-	string m_csd;
+	std::string m_csd;
 	CsoundPerformanceThread *m_pt;
 
 public:
 
-	CsoundSession(string const &csdFileName) : Csound() {
+	CsoundSession(std::string const &csdFileName) : Csound() {
 	m_pt = NULL;
 	m_csd = "";
 	if(!csdFileName.empty()){
@@ -23,7 +21,7 @@ public:
 	}
 };
 	void startThread();
-	void resetSession(string const &csdFileName);
+	void resetSession(std::string const &csdFileName);
 	void stopPerformance();
 	void mainLoop();
 
